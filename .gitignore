@@ -1,0 +1,19 @@
+# python and jupyter notebook #
+###############################
+__pycache__
+.ipynb_checkpoints
+*.pyc
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+*~
+
+# custom #
+##########
+untracked
+_test
+_test.py
+
