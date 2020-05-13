@@ -7,13 +7,21 @@ import re
 
 def read_csv(csvfilename):
     ''' read from a csv file '''
-    all_mol_address = []
+    data = []
     with open(csvfilename, newline='') as f:
         reader = csv.reader(f)
         headers = next(f) # skip header
         for row in reader:
-            all_mol_address.append(row)
-    return all_mol_address
+            data.append(row)
+    return data
+
+def write_csv(csvfilename, data_list, header=None, quoting=csv.QUOTE_NONNUMERIC):
+    ''' for now data is a list '''
+    with open(csvfilename, 'w', newline='') as f:
+        writer = csv.writer(f, quoting=quoting)
+        if header is not None:
+            writer.writerow(header)
+        writer.writerows(data_list)
 
 def make_dir(dir):
     ''' create directory if not already exists '''
@@ -42,3 +50,14 @@ def search_string_between(search_from, front, back, extract_pattern=True):
         return result.group(1)
     else:
         return result
+
+def count_lines_in_file(filename):
+    """
+    returns the number of lines in a file. works for an empty file as well.
+    if file does not exists, returns None.
+    """
+    try:
+        num_lines = sum(1 for line in open(filename))
+        return num_lines
+    except:
+        return None
